@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Trim empty padding from logo images using the transparent source bounds."""
+"""Trim empty padding from the transparent source logo using alpha-channel bounds."""
 
 from __future__ import annotations
 
@@ -12,39 +12,34 @@ except ImportError:
     print("Pillow is required. Run: python3 -m venv .venv && .venv/bin/pip install pillow", file=sys.stderr)
     sys.exit(1)
 
-
-def crop_box_from_transparent(path: Path) -> tuple[int, int, int, int] | None:
-    with Image.open(path) as img:
-        return img.convert("RGBA").getbbox()
+# Ignore faint outer glow; lower = tighter crop.
+ALPHA_THRESHOLD = 25
 
 
-def trim_file(path: Path, box: tuple[int, int, int, int]) -> tuple[int, int]:
-    with Image.open(path) as img:
-        cropped = img.crop(box)
-        cropped.save(path, optimize=True)
-        return cropped.size
+def alpha_bbox(img: Image.Image, threshold: int = ALPHA_THRESHOLD) -> tuple[int, int, int, int] | None:
+    rgba = img.convert("RGBA")
+    alpha = rgba.split()[3]
+    # getbbox() on RGBA includes transparent pixels with non-zero RGB (palette bleed).
+    mask = alpha.point(lambda a: 255 if a > threshold else 0)
+    return mask.getbbox()
 
 
 def main() -> None:
     root = Path(__file__).resolve().parents[1]
     src = root / "assets" / "lucid-logo.png"
-    readme_dir = root / "assets" / "readme"
 
     if not src.exists():
         print(f"Missing source logo: {src}", file=sys.stderr)
         sys.exit(1)
 
-    box = crop_box_from_transparent(src)
-    if not box:
-        print("No visible logo content found.", file=sys.stderr)
-        sys.exit(1)
-
-    targets = [src, readme_dir / "dark.png", readme_dir / "light.png"]
-    for path in targets:
-        if not path.exists():
-            continue
-        size = trim_file(path, box)
-        print(f"Trimmed {path.relative_to(root)} -> {size[0]}x{size[1]}")
+    with Image.open(src) as img:
+        box = alpha_bbox(img)
+        if not box:
+            print("No visible logo content found.", file=sys.stderr)
+            sys.exit(1)
+        cropped = img.convert("RGBA").crop(box)
+        cropped.save(src, optimize=True)
+        print(f"Trimmed {src.relative_to(root)} -> {cropped.size[0]}x{cropped.size[1]}")
 
 
 if __name__ == "__main__":
