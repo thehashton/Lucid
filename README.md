@@ -1,5 +1,9 @@
 <p align="center">
-  <img src="assets/lucid-logo.png" alt="Lucid — automated accessibility auditing" width="480" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/readme/dark.png" />
+    <source media="(prefers-color-scheme: light)" srcset="assets/readme/light.png" />
+    <img src="assets/lucid-logo.png" alt="Lucid — automated accessibility auditing" width="480" />
+  </picture>
 </p>
 
 # Lucid
@@ -136,7 +140,9 @@ src/
 ├── report/             # JSON + terminal output
 └── github/             # GitHub Issues integration
 assets/
-└── lucid-logo.png      # Project logo
+├── lucid-logo.png        # Source logo (transparent)
+├── lucid-logo-dark.png   # README variant for dark mode (#0d1117)
+└── lucid-logo-light.png  # README variant for light mode
 ```
 
 ## License
