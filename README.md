@@ -130,6 +130,22 @@ pnpm test
 pnpm lint
 ```
 
+### Brand assets
+
+| File | Purpose |
+|------|---------|
+| [`assets/lucid-logo.png`](assets/lucid-logo.png) | **Canonical transparent logo** — use this for a future website, docs, npm, etc. |
+| [`assets/readme/dark.png`](assets/readme/dark.png) | GitHub README only — composited onto GitHub dark background (`#0d1117`) |
+| [`assets/readme/light.png`](assets/readme/light.png) | GitHub README only — composited onto white for light mode |
+
+GitHub flattens transparent PNGs onto solid black/white in READMEs, so the `assets/readme/` variants avoid a visible box around the logo. The README uses a `<picture>` element to swap them by theme.
+
+After updating the transparent logo, regenerate the README variants:
+
+```bash
+./scripts/generate-readme-logos.sh
+```
+
 ### Project structure
 
 ```
@@ -140,9 +156,12 @@ src/
 ├── report/             # JSON + terminal output
 └── github/             # GitHub Issues integration
 assets/
-├── lucid-logo.png        # Source logo (transparent)
-├── lucid-logo-dark.png   # README variant for dark mode (#0d1117)
-└── lucid-logo-light.png  # README variant for light mode
+├── lucid-logo.png      # Transparent source logo (website, docs, etc.)
+└── readme/
+    ├── dark.png        # GitHub README — dark theme
+    └── light.png       # GitHub README — light theme
+scripts/
+└── generate-readme-logos.sh
 ```
 
 ## License
