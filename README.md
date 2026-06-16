@@ -140,10 +140,16 @@ pnpm lint
 
 GitHub flattens transparent PNGs onto solid black/white in READMEs, so the `assets/readme/` variants avoid a visible box around the logo. The README uses a `<picture>` element to swap them by theme.
 
-After updating the transparent logo, regenerate the README variants:
+After updating the transparent logo, trim padding and regenerate the README variants:
 
 ```bash
 ./scripts/generate-readme-logos.sh
+```
+
+To trim padding only:
+
+```bash
+.venv/bin/python scripts/trim-logo.py
 ```
 
 ### Project structure
@@ -161,7 +167,8 @@ assets/
     ├── dark.png        # GitHub README — dark theme
     └── light.png       # GitHub README — light theme
 scripts/
-└── generate-readme-logos.sh
+├── generate-readme-logos.sh
+└── trim-logo.py
 ```
 
 ## License
