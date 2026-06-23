@@ -6,7 +6,15 @@
   </picture>
 </p>
 
+<p align="center">
+  <a href="https://www.npmjs.com/package/lucid-a11y">
+    <img src="assets/readme/npm-package.png" alt="lucid-a11y on npm" width="720" />
+  </a>
+</p>
+
 # Lucid
+
+[![npm version](https://img.shields.io/npm/v/lucid-a11y)](https://www.npmjs.com/package/lucid-a11y)
 
 Automated accessibility auditing that brings clarity to your codebase for hitting those a11y goals.
 
@@ -17,17 +25,20 @@ Lucid audits an entire web project for accessibility violations — not just a s
 No config file is required in the target project.
 
 ```bash
+# Install as a dev dependency (optional — or use npx without installing)
+pnpm add -D lucid-a11y
+
 # Install Chromium for Playwright (one-time per machine)
 npx playwright install chromium
 
 # Recommended: audit all URLs from a sitemap
-npx lucid --sitemap http://localhost:3000/sitemap.xml
+npx lucid-a11y --sitemap http://localhost:3000/sitemap.xml
 
 # Spider internal links from a root URL
-npx lucid --crawl http://localhost:3000
+npx lucid-a11y --crawl http://localhost:3000
 
 # Next.js: derive routes from app/ or pages/ and audit against a dev server
-npx lucid --framework nextjs --base-url http://localhost:3000
+npx lucid-a11y --framework nextjs --base-url http://localhost:3000
 ```
 
 ## Route discovery
@@ -98,7 +109,7 @@ Use `--create-issues` to open one GitHub Issue per unique violation type (axe ru
 - Repository resolved from `git remote get-url origin`, or override with `--repo owner/name`
 
 ```bash
-npx lucid --sitemap http://localhost:3000/sitemap.xml --create-issues
+npx lucid-a11y --sitemap http://localhost:3000/sitemap.xml --create-issues
 ```
 
 Use `--dry-run` to preview issue titles without creating them. Existing open issues with the same `[A11y] {ruleId}` title prefix are skipped.
@@ -110,11 +121,11 @@ Use `--dry-run` to preview issue titles without creating them. Existing open iss
   run: npx playwright install chromium
 
 - name: Run Lucid accessibility audit
-  run: npx lucid --sitemap http://localhost:3000/sitemap.xml
+  run: npx lucid-a11y --sitemap http://localhost:3000/sitemap.xml
 
 - name: Create GitHub Issues on failure
   if: failure()
-  run: npx lucid --sitemap http://localhost:3000/sitemap.xml --create-issues
+  run: npx lucid-a11y --sitemap http://localhost:3000/sitemap.xml --create-issues
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```

@@ -1,13 +1,40 @@
 {
-  "name": "lucid",
+  "name": "lucid-a11y",
   "version": "0.1.0",
   "description": "Automated accessibility auditing across full web projects.",
   "license": "MIT",
   "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
   "bin": {
     "lucid": "./dist/cli.js"
   },
   "files": ["dist"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thehashton/Lucid.git"
+  },
+  "homepage": "https://github.com/thehashton/Lucid#readme",
+  "bugs": {
+    "url": "https://github.com/thehashton/Lucid/issues"
+  },
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "axe-core",
+    "playwright",
+    "audit",
+    "wcag",
+    "cli"
+  ],
   "engines": {
     "node": ">=20"
   },
@@ -39,4 +66,3 @@
     "@types/node": "^22.10.1"
   }
 }
-
