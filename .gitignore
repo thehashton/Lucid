@@ -1,6 +1,10 @@
 # Dependencies
 node_modules/
-.venv/
+.pnpm-store/
+
+# Package managers
+.npm/
+*.tgz
 
 # Build output
 dist/
@@ -28,6 +32,8 @@ Thumbs.db
 *.log
 npm-debug.log*
 pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # TypeScript cache
 *.tsbuildinfo
