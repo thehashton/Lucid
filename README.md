@@ -185,3 +185,7 @@ scripts/
 ## License
 
 MIT
+
+---
+
+Built by [Harry Ashton](https://hashton.dev) · [Hashton Agency](https://www.hashton.agency) · [CodePrepped](https://codeprepped.com)
