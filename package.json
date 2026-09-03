@@ -1,6 +1,6 @@
 {
   "name": "lucid-a11y",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Automated accessibility auditing across full web projects.",
   "license": "MIT",
   "type": "module",
@@ -22,7 +22,7 @@
     "type": "git",
     "url": "git+https://github.com/thehashton/Lucid.git"
   },
-  "homepage": "https://github.com/thehashton/Lucid#readme",
+  "homepage": "https://hashton.dev/work/lucid",
   "bugs": {
     "url": "https://github.com/thehashton/Lucid/issues"
   },
